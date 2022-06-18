@@ -2,33 +2,13 @@
   
 
 var socket = io();
-
+side = 11
 
 
 function setup() {
     createCanvas(side * 80, side * 80)
     background('#acacac')
-    for (let y = 0; y < matrix.length; y++) {
-        for (let x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 1) {
-                let gr = new Grass(x, y)
-                grassArr.push(gr)
-            }
-            if (matrix[y][x] == 2) {
-                let gre = new GrassEater(x, y)
-                GrassEaterArr.push(gre)
-            }
-            if (matrix[y][x] == 3) {
-                let pr = new Predator(x, y)
-                predatorArr.push(pr)
-            }
-            if(matrix[y][x] == 4){
-                let bm = new bomb(x,y)
-                bombArr.push(bm)
-            }
-        }
-
-    }
+    
 }
 
 function nkarel(matrix) {
@@ -54,6 +34,7 @@ function nkarel(matrix) {
         }
     }
 }
+p = document.getElementById("btn5")
 
 setInterval(
     function () {
