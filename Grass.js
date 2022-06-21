@@ -1,10 +1,9 @@
 let LivingCreature = require('./LivingCreature.js')
 
 module.exports = class Grass extends LivingCreature{
-    constructor(x, y,  multiply) {
-        super(x, y,  multiply);
-    }
+   
     mul() {
+        // console.log("hey");
         this.multiply++;
         if (this.multiply >= 5) {
             let emptyCells = super.chooseCell(0)

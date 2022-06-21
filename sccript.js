@@ -6,12 +6,13 @@ side = 11
 
 
 function setup() {
-    createCanvas(side * 80, side * 80)
+    createCanvas(side * 50, side * 50)
     background('#acacac')
     
 }
 
 function nkarel(matrix) {
+    // console.log(matrix);
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
 
@@ -34,10 +35,21 @@ function nkarel(matrix) {
         }
     }
 }
-p = document.getElementById("btn5")
 
-setInterval(
-    function () {
+setInterval(function(){
+
     socket.on('send matrix', nkarel)
-    },1000
-)
+},1000)
+
+ 
+function fills1(){
+    socket.emit("barev")
+}
+
+
+function fills2(){
+    socket.emit("predator")
+}
+function fills(){
+    socket.emit("water")
+}
