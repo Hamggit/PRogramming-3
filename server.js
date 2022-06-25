@@ -38,46 +38,10 @@ Grass = require("./Grass")
 GrassEater = require("./GrassEater")
 predator = require("./Predator")
 Water = require("./Water")
-Bomb = require("./Bomb")
+bomb = require("./bomb")
 
 
-function fills3(grs) {
-    for (let i = 0; i < grs; i++) {
-        let x = Math.floor(Math.random() * 80)
-        let y = Math.floor(Math.random() * 80)
-        if (matrix[y][x] == 0 || 1 || 2 || 3) {
-            matrix[y][x] = 4
-        }
-    }
-    for (let y = 0; y < matrix.length; y++) {
-        for (let x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 4) {
-                let pr = new bomb(x, y)
-                bombArr.push(pr)
-            }
-        }
-    }
-    io.sockets.emit('send matrix', matrix)
 
-}
-function fills4(gr) {
-    for (let i = 0; i < gr; i++) {
-        let x = Math.floor(Math.random() * 80)
-        let y = Math.floor(Math.random() * 80)
-        if (matrix[y][x] == 0) {
-            matrix[y][x] = 5
-        }
-    }
-    for (let y = 0; y < matrix.length; y++) {
-        for (let x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 5) {
-                let gr = new water(x, y)
-                waterArr.push(gr)
-            }
-        }
-    }
-    io.sockets.emit('send matrix', matrix)
-}
 
 function createObject(matrix) {
     for (let y = 0; y < matrix.length; y++) {
@@ -121,7 +85,7 @@ function game() {
     }
     io.sockets.emit("send matrix", matrix);
 }
-setInterval(game, 1000)
+setInterval(game, 2000)
 
 
 function fills1() {
@@ -139,6 +103,20 @@ function fills1() {
 
 
 
+function fills3(grs) {
+    for (let i = 0; i < grs; i++) {
+        let x = Math.floor(Math.random() * 80)
+        let y = Math.floor(Math.random() * 80)
+        if (matrix[y][x] == 0 || 1 || 2 || 3) {
+            matrix[y][x] = 4
+        let pr = new bomb(x, y)
+            bombArr.push(pr)
+        }
+    }
+}
+
+
+
 
 function fills2() {
     for (let i = 0; i < 5; i++) {
@@ -150,10 +128,6 @@ function fills2() {
             predatorArr.push(pr)
         }
     }
-
-
-
-
 }
 
 
@@ -166,19 +140,36 @@ function fills() {
             matrix[y][x] = 1
             let gr = new Grass(x, y)
             grassArr.push(gr)
+
         }
     }
 
 }
+function fills4() {
+    for (let i = 0; i < 5; i++) {
+        let x = Math.floor(Math.random() * 80)
+        let y = Math.floor(Math.random() * 80)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 5
+            let gr = new Water(x, y)
+            waterArr.push(gr)
+        }
+    }
+}
+
+
+
 
 
 
 
 io.on("connection", function (socket) {
     createObject(matrix)
+    socket.on("grass", fills)
     socket.on("barev", fills1)
     socket.on("predaor", fills2)
-    socket.on("water", fills)
+    socket.on("water", fills4)
+    socket.on("bomb", fills3)
 }
 
 )

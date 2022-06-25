@@ -22,7 +22,7 @@ module.exports = class Predator extends LivingCreature{
 
     move() {
         this.energy--;
-        let found = this.search(0);
+        let found = super.chooseCell(0);
         let foundRand = found[Math.floor(Math.random()*found.lenght)];
         if (foundRand && this.energy > 0) {
             let x = foundRand[0];
@@ -37,7 +37,7 @@ module.exports = class Predator extends LivingCreature{
         }
     }
     mul() {
-        let found = this.search(0);
+        let found = super.chooseCell(0);
         let foundRand = found[Math.floor(Math.random()*found.lenght)];
         if (foundRand) {
             let x = foundRand[0];
@@ -49,9 +49,9 @@ module.exports = class Predator extends LivingCreature{
         }
     }
     eat() {
-        let found = this.search(1);
+        let found =super.chooseCell(1);
         let foundRand = found[Math.floor(Math.random()*found.lenght)]
-        let found1 = this.search(2);
+        let found1 = super.chooseCell(2);
         let foundRand1 = found1[Math.floor(Math.random()*found.lenght)]
         if (foundRand) {
             this.energy++;

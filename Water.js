@@ -8,8 +8,8 @@ module.exports = class water extends LivingCreature{
 
 
 GrassCreate(){
-    let found = this.search(0)
-    let foundRand = found[Math.floor(Math.random()*found.lenght)]
+    let found = super.chooseCell(0)
+    let foundRand = found[Math.floor(Math.random()*found.length)]
     this.energy--
     if (this.energy >= 0 && foundRand) {
         let x = foundRand[0]
@@ -30,6 +30,5 @@ die() {
         }
     }
 
- 
 }
 }

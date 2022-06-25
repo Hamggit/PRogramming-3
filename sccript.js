@@ -2,11 +2,11 @@
   
 
 var socket = io();
-side = 11
+side = 10
 
 
 function setup() {
-    createCanvas(side * 50, side * 50)
+    createCanvas(side * 80, side * 80)
     background('#acacac')
     
 }
@@ -46,10 +46,15 @@ function fills1(){
     socket.emit("barev")
 }
 
-
 function fills2(){
     socket.emit("predator")
 }
-function fills(){
+function fills4(){
     socket.emit("water")
+}
+function fills3(){
+    socket.emit("bomb")
+}
+function fills(){
+    socket.emit("grass")
 }
